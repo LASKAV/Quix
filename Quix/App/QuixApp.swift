@@ -6,7 +6,7 @@ import SwiftData
 struct QuixApp: App {
     var body: some Scene {
         WindowGroup {
-            WelcomeScreen()
+            OnbordingManager()
         }
     }
 }
