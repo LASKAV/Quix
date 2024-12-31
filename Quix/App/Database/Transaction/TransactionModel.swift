@@ -5,7 +5,7 @@ import SwiftData
 @Model
 final class Transaction {
     
-    @Attribute(.unique) public var id = UUID().uuidString
+    @Attribute(.unique) public var id: UUID
     
     public var name: String?
     public var category: String?
@@ -28,6 +28,7 @@ final class Transaction {
          account: [Account]? = nil,
          isExpense: Bool) {
         
+        self.id = UUID()
         self.name = name
         self.category = category
         self.amount = amount

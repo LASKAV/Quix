@@ -9,7 +9,7 @@ final class User {
     static let shared = User()
     private init() {}
     
-    @Attribute(.unique) public var id = UUID().uuidString
+    @Attribute(.unique) public var id = UUID()
     
     public var currency: String?
     public var language: String?

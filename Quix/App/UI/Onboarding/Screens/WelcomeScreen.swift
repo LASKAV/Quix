@@ -31,9 +31,9 @@ struct OnboardingCardView: View {
         VStack(alignment: .center, spacing: 0) {
             Image(systemName: onboarding.image)
                 .resizable()
+                .aspectRatio(contentMode: .fit)
                 .frame(width: 350, height: 350)
                 .padding(EdgeInsets(top: 50, leading: 20, bottom: 0, trailing: 20))
-//                .border(.red)
 
             Text(onboarding.title)
                 .font(.system(size: 25))
@@ -58,6 +58,7 @@ struct OnboardingCardView: View {
         }
     }
 }
+
 struct OnbordingManager: View {
     var onboardingiItems = OnboardingItem.OnData
     var body: some View {
@@ -73,6 +74,7 @@ struct OnbordingManager: View {
             UIPageControl.appearance()
                 .pageIndicatorTintColor = UIColor.customGray
         }
+        
         ContinueButton()
     }
 }
