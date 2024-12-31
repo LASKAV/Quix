@@ -7,25 +7,25 @@ final class Transaction {
     
     @Attribute(.unique) public var id: UUID
     
-    public var name: String?
-    public var category: String?
-    public var amount: Double?
-    public var date: Date?
+    public var name: String
+    public var category: String
+    public var amount: Double
+    public var date: Date
     
     // Add indexe for name
     #Index<Transaction>([\.name], [\.category])
     
-    public var account: [Account]?
+    public var account: [Account]
     
     public var isEdited: Bool
     public var isExpense: Bool
     public var isTransfer: Bool
     
-    init(name: String? = nil,
-         category: String? = nil,
-         amount: Double? = nil,
+    init(name: String = "",
+         category: String = "",
+         amount: Double = 0,
          date: Date = Date(),
-         account: [Account]? = nil,
+         account: [Account] = [],
          isExpense: Bool) {
         
         self.id = UUID()

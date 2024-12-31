@@ -6,7 +6,7 @@ struct OnboardingItem: Identifiable, Hashable {
     let title: String
     let description: String
     
-    static let OnData: [OnboardingItem] = [
+    static let onData: [OnboardingItem] = [
         OnboardingItem(
             image: "receipt",
             title: "Manage",
@@ -60,7 +60,7 @@ struct OnboardingCardView: View {
 }
 
 struct OnbordingManager: View {
-    var onboardingiItems = OnboardingItem.OnData
+    var onboardingiItems = OnboardingItem.onData
     var body: some View {
         TabView {
             ForEach(onboardingiItems) { item in

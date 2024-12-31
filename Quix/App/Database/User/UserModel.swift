@@ -11,9 +11,8 @@ final class User {
     
     @Attribute(.unique) public var id = UUID()
     
-    public var currency: String?
     public var language: String?
-    
+
     public var account: [Account]?
     public var passcode: String?
     
@@ -23,7 +22,6 @@ final class User {
     
     func configure(passcode: String, currency: String, language: String) {
             self.passcode = passcode
-            self.currency = currency
             self.language = language
         }
     
