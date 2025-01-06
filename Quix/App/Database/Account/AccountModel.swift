@@ -5,25 +5,40 @@ import SwiftData
 @Model
 final class Account {
     
-    @Attribute(.unique) public var id: UUID
+    @Attribute(.unique) var id: UUID
 
-    public var name: String
-    public var currency: String
-    public var total: Double
-    public var transactions: [Transaction]
+    var name: String
+    var currency: String
+    var total: Double
+    var cardColor: String
+    
+    @Relationship var transactions: [Transaction]? = []
     
     // Add indexe for name
     #Index<Account>([\.name])
     
     init(name: String = "",
-         transactions: [Transaction] = [],
          currency: String = "USD",
-         card: Card) {
+         cardColor: String) {
         self.id = UUID()
         self.name = name
         self.currency = currency
-        self.transactions = transactions
-        self.total = transactions.reduce(0) { $0 + $1.amount }
+        self.cardColor = cardColor
+        self.total = 0.0
     }
     
+}
+
+@Observable
+class AccountViewModel {
+    
+    private var modelContext: ModelContext
+    
+    init(modelContext: ModelContext) {
+        self.modelContext = modelContext
+    }
+    
+    static func formatAmount(_ total: Double, for currency: String) -> String {
+        return total.formatted(.currency(code: currency).presentation(.narrow))
+    }
 }

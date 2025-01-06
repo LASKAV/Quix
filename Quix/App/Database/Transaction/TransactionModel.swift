@@ -5,21 +5,21 @@ import SwiftData
 @Model
 final class Transaction {
     
-    @Attribute(.unique) public var id: UUID
+    @Attribute(.unique) var id: UUID
     
-    public var name: String
-    public var category: String
-    public var amount: Double
-    public var date: Date
+    var name: String
+    var category: String
+    var amount: Double
+    var date: Date
     
     // Add indexe for name
     #Index<Transaction>([\.name], [\.category])
     
-    public var account: [Account]
+    var account: [Account]
     
-    public var isEdited: Bool
-    public var isExpense: Bool
-    public var isTransfer: Bool
+    var isEdited: Bool
+    var isExpense: Bool
+    var isTransfer: Bool
     
     init(name: String = "",
          category: String = "",
