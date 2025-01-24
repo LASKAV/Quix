@@ -61,7 +61,7 @@ struct CardView: View {
                 
                 Spacer()
                 
-                Text(amount ?? "00.00")
+                Text("$\(amount ?? "00.00")")
                     .font(.system(size: 35))
                     .foregroundStyle(Color.black)
                     .fontWeight(.bold)

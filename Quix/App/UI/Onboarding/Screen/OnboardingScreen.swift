@@ -32,7 +32,6 @@ struct ContinueButton: View {
 //            userViewModel.deleteUser()
             userViewModel.initUser()
             userViewModel.printAllUsers()
-            
         } label: {
             Text("Continue")
                 .font(.system(size: 20,

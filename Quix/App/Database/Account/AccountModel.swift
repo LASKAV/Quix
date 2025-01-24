@@ -10,7 +10,7 @@ final class Account {
     var name: String
     var currency: String
     var total: Double
-    var cardColor: String
+    var cardColor: Int
     
     @Relationship var transactions: [Transaction]? = []
     
@@ -19,7 +19,7 @@ final class Account {
     
     init(name: String = "",
          currency: String = "USD",
-         cardColor: String) {
+         cardColor: Int) {
         self.id = UUID()
         self.name = name
         self.currency = currency
