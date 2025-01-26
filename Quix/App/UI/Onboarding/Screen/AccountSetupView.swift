@@ -1,30 +1,6 @@
 import SwiftUI
 import SwiftData
 
-enum CardColor: Hashable {
-    case cardBlue
-    case cardPink
-    case cardYellow
-    
-    var id: Int {
-        switch self {
-        case .cardBlue: return 0
-        case .cardPink: return 1
-        case .cardYellow: return 2
-        }
-    }
-    
-    var color: Color {
-        switch self {
-        case .cardBlue:
-            return Color.cardBlue
-        case .cardPink:
-            return Color.cardPink
-        case .cardYellow:
-            return Color.cardYellow
-        }
-    }
-}
 
 struct AccountSetupView: View {
     @Environment(\.modelContext) private var modelContext
