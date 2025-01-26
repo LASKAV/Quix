@@ -6,6 +6,14 @@ enum CardColor: Hashable {
     case cardPink
     case cardYellow
     
+    var id: Int {
+        switch self {
+        case .cardBlue: return 0
+        case .cardPink: return 1
+        case .cardYellow: return 2
+        }
+    }
+    
     var color: Color {
         switch self {
         case .cardBlue:
@@ -16,7 +24,6 @@ enum CardColor: Hashable {
             return Color.cardYellow
         }
     }
-    
 }
 
 struct AccountSetupView: View {
@@ -32,21 +39,12 @@ struct AccountSetupView: View {
     @State private var isExpanded = false
     @State private var selectedOption: Category?
     
-    
     var body: some View {
+        
         VStack(spacing: 0 ) {
             
             // MARK: Title
-            Text("Account setup")
-                .font(.system(size: 20, weight: .semibold))
-                .foregroundStyle(Color.secondary)
-                .lineSpacing(5)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .multilineTextAlignment(.center)
-                .lineLimit(1)
-                .padding(.top, 20)
-                .padding(.bottom, 30)
-                .padding([.leading], 30)
+            TitleView()
             
             // MARK: CardView
             CardView(
@@ -59,13 +57,17 @@ struct AccountSetupView: View {
                 TextField("Account name", text: $name)
                     .textFieldStyle(TextFieldStyleH1())
                     .padding([.leading], 25)
+                
                 HStack(spacing: 10) {
                     Button(action: { isExpanded.toggle() }) {
                         HStack {
                             Text(currency)
+                            
                             Spacer()
+                            
                             Image(systemName: isExpanded ?
-                                  "chevron.up" : "chevron.down")
+                                  "chevron.up" :
+                                  "chevron.down")
                             .animation(.snappy,
                                        value: isExpanded)
                         }
@@ -85,33 +87,36 @@ struct AccountSetupView: View {
             
             Button {
                 viewModel = AccountViewModel(modelContext: modelContext)
+//                viewModel?.createAccount(name: name, currency: currency)
             } label: {
                 Text("Continue")
-                    .font(.system(size: 20,
-                                  weight: .heavy,
-                                  design: .default))
-                    .foregroundStyle(Color.white)
                     .padding(EdgeInsets(
                         top: 13, leading: 37,
                         bottom: 13, trailing: 37))
             }
             .buttonStyle(OnbordingExtraButton())
+            
         }
+        .ignoresSafeArea(.keyboard, edges: .bottom)
     }
 }
 
-// MARK: Custom TextField Transaction
-struct TextFieldStyleH1: TextFieldStyle {
-    func _body(configuration: TextField<Self._Label>) -> some View {
-        configuration
-                .bold()
-                .foregroundStyle(Color.blue)
-                .padding(15)
-                .frame(maxWidth: .infinity)
-                .background(Color.gray.opacity(0.1))
-                .clipShape(RoundedCorner(radius: 15))
+
+private struct TitleView: View {
+    var body: some View {
+        Text("Account setup")
+            .font(.system(size: 20, weight: .semibold))
+            .foregroundStyle(Color.secondary)
+            .lineSpacing(5)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .multilineTextAlignment(.center)
+            .lineLimit(1)
+            .padding(.top, 20)
+            .padding(.bottom, 30)
+            .padding([.leading], 30)
     }
 }
+
 
 #Preview {
     AccountSetupView()

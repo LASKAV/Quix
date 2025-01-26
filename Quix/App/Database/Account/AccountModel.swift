@@ -10,7 +10,6 @@ final class Account {
     var name: String
     var currency: String
     var total: Double
-    var cardColor: Int
     
     @Relationship var transactions: [Transaction]? = []
     
@@ -18,12 +17,10 @@ final class Account {
     #Index<Account>([\.name])
     
     init(name: String = "",
-         currency: String = "USD",
-         cardColor: Int) {
+         currency: String = "USD") {
         self.id = UUID()
         self.name = name
         self.currency = currency
-        self.cardColor = cardColor
         self.total = 0.0
     }
     
@@ -38,7 +35,28 @@ class AccountViewModel {
         self.modelContext = modelContext
     }
     
+    func createAccount(name: String,
+                       currency: String) {
+        
+        modelContext.insert(
+            Account(name: name, currency: currency))
+        
+        print("createAccount")
+        _ = modelContext.save
+    }
+    
+    func fetchAccount() -> [Account] {
+        do {
+            let account = try modelContext.fetch(FetchDescriptor<Account>())
+            return account
+        } catch {
+            print("Error fetching users: \(error.localizedDescription)")
+            return []
+        }
+    }
+    
     static func formatAmount(_ total: Double, for currency: String) -> String {
         return total.formatted(.currency(code: currency).presentation(.narrow))
     }
+
 }
