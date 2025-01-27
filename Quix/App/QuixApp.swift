@@ -5,7 +5,7 @@ import SwiftData
 struct QuixApp: App {
     var body: some Scene {
         WindowGroup {
-            ScreenManager()
+            OnboardingManager()
                 .modelContainer(for: [User.self, Account.self, Transaction.self])
         }
     }

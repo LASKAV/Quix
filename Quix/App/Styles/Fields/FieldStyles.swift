@@ -9,7 +9,7 @@ struct TextFieldStyleH1: TextFieldStyle {
             .foregroundStyle(Color.blue)
             .padding(15)
             .frame(maxWidth: .infinity)
-            .background(Color.gray.opacity(0.1))
+            .background(Color.gray.opacity(0.2))
             .clipShape(RoundedCorner(radius: 15))
     }
 }

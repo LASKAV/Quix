@@ -1,7 +1,7 @@
 import SwiftUI
 import SwiftData
 
-struct ScreenManager: View {
+struct OnboardingManager: View {
 //    @Environment(\.modelContext) private var modelContext
 //    @Query private var users: [User]
 

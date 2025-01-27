@@ -36,7 +36,7 @@ struct CardView: View {
     @Binding var Cardcolor: CardColor
     @Binding var name: String
     @Binding var amount: String?
-    @Binding var currency: String
+    @Binding var currency: CurrencyType
     
     private let cardWidth: CGFloat = 340
     private let cardHeight: CGFloat = 200
@@ -57,26 +57,24 @@ struct CardView: View {
                     .fontWeight(.semibold)
                     .lineLimit(1)
                     .padding([.leading, .top], 20)
-                    .frame(width: cardWidth, alignment: .leading)
+                    .frame(width: cardWidth, height: cardHeight / 3, alignment: .topLeading)
+                    
                 
-                Spacer()
-                
-                Text("$\(amount ?? "00.00")")
+                Text("\(currency.symbol)\(amount ?? "00.00")")
                     .font(.system(size: 35))
                     .foregroundStyle(Color.black)
                     .fontWeight(.bold)
                     .lineLimit(1)
-                    .frame(width: cardWidth, alignment: .center)
+                    .frame(width: cardWidth, height: cardHeight / 3, alignment: .center)
                 
-                Spacer()
-                
-                Text(currency)
+                Text(currency.rawValue)
                     .font(.system(size: 20))
                     .foregroundStyle(Color.black)
                     .fontWeight(.semibold)
                     .lineLimit(1)
                     .padding([.trailing, .bottom], 20)
-                    .frame(width: cardWidth, alignment: .trailing)
+                    .frame(width: cardWidth, height: cardHeight / 3, alignment: .bottomTrailing)
+                    
             }
             .frame(width: cardWidth, height: cardHeight)
         }

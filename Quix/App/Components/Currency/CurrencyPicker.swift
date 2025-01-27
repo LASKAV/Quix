@@ -1,11 +1,16 @@
 import SwiftUI
 
 struct CurrencyPicker: View {
+    @Binding var selectedCurrency: CurrencyType
+    @Binding var isExpanded: Bool
+    
     var body: some View {
-        Text("Hello, World!")
+        Picker("", selection: $selectedCurrency) {
+            ForEach(CurrencyType.allCases) { currency in
+                Text("\(currency.symbol) \(currency.rawValue)").tag(currency)
+            }
+        }
+        .pickerStyle(WheelPickerStyle())
     }
 }
 
-#Preview {
-    CurrencyPicker()
-}
