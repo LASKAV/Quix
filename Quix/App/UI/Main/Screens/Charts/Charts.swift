@@ -61,7 +61,7 @@ struct TransactionCategoryChart: Identifiable {
 }
 
 // MARK: Mock Category
-private func mockCategory() -> [TransactionCategoryChart] {
+func mockCategory() -> [TransactionCategoryChart] {
     let mockData: [TransactionCategoryChart] = [
         .init(name: "Mortgag", amount: 20),
         .init(name: "Utilities", amount: 40),
@@ -73,6 +73,7 @@ private func mockCategory() -> [TransactionCategoryChart] {
 
 struct ChartsScreen: View {
     @State private var title = "Charts"
+    @State private var dataCategory: [TransactionCategoryChart] = mockCategory()
     @State private var currentAngle: Double = 0
     
     var body: some View {
@@ -80,41 +81,9 @@ struct ChartsScreen: View {
             VStack {
                 TitleViewModel(name: $title)
                 
-                Chart(mockCategory()) { category in
-                    SectorMark(
-                        angle:
-                                .value("Amount", min(category.amount, currentAngle)),
-                        innerRadius: .ratio(0.4),
-                        outerRadius: .inset(0),
-                        angularInset: 1
-                    )
-                    
-                    .foregroundStyle(.gray.opacity(0.3))
-                    .cornerRadius(5)
-                }
-                .frame(width: 300, height: 300)
-                .onAppear {
-                    withAnimation(.linear(duration: 1)) {
-                        currentAngle = 300
-                    }
-                }
-                
-                
-                
-                HStack(alignment: .center, spacing: 10) {
-                    VStack(alignment: .leading, spacing: 5) {
-                        Text("Category")
-                            .font(.system(size: 18, weight: .regular))
-                        
-                        Text("over the last month")
-                            .font(.system(size: 16, weight: .medium))
-                            .foregroundColor(.secondary)
-                    }
-                }
-                .frame(width: 340, alignment: .leading)
-                
-                ListCategoryDefault(titleName: "")
-                    .padding(EdgeInsets(top: 20, leading: 30, bottom: 30, trailing: 30))
+                ChartDonut(data: $dataCategory,
+                           widthSize: 300,
+                           heightSize: 300)
                 
                 HStack(alignment: .center, spacing: 0) {
                     Text("Amount")
