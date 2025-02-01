@@ -11,7 +11,7 @@ final class User {
     var onboardingCompleted: Bool = false
     var faceIdEnabled: Bool = false
     
-    init() {}
+    init() {print("User init: \(id) ")}
     deinit {print("User deleted: \(id) ")}
     
     func configure(passcode: String, language: String) {

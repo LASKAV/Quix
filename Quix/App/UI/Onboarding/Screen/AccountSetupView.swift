@@ -62,6 +62,7 @@ struct AccountSetupView: View {
                 Button {
                     let account = Account(name: name, currency: currency.rawValue)
                     modelContext.insert(account)
+                    try? modelContext.save()
                     navigateToNextScreen = true
                 } label: {
                     Text("Continue")

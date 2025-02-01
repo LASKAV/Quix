@@ -2,8 +2,9 @@ import SwiftUI
 import SwiftData
 
 struct OnboardingScreen: View {
+    
     var onboardingiItems = Onboarding.onData
-
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -17,35 +18,35 @@ struct OnboardingScreen: View {
                     UIPageControl.appearance().currentPageIndicatorTintColor = .blueIce
                     UIPageControl.appearance().pageIndicatorTintColor = UIColor.customGray
                 }
-                
                 ContinueButton()
             }
         }
-        .modelContainer(for: User.self) // ✅ Устанавливаем modelContext в Environment
+        .modelContainer(for: User.self)
     }
 }
 
 // MARK: Continue Button
 struct ContinueButton: View {
+    
     @Environment(\.modelContext) private var context
-    @State private var navigateToAccountSetup = false
-    @Query private var users: [User] // ✅ `user` → `users`, так как `@Query` возвращает массив
-
+    @Environment(\.dismiss) private var dismiss
+    @Query private var user: [User]
+    @State private var navigate = false
+    
     var body: some View {
         VStack {
             Button {
-                if let existingUser = users.first { // ✅ Используем `users.first`
-                    if existingUser.onboardingCompleted {
-                        navigateToAccountSetup = true
-                    } else {
-                        existingUser.onboardingCompleted = true
-                        navigateToAccountSetup = true
-                    }
-                } else {
+                switch user.isEmpty {
+                case true:
+                    print("user.isEmpty true")
                     let newUser = User()
                     newUser.onboardingCompleted = true
                     context.insert(newUser)
-                    navigateToAccountSetup = true
+                    try? context.save() 
+                    navigate = true
+                case false:
+                    print("user.isEmpty false")
+                    navigate = true
                 }
             } label: {
                 Text("Continue")
@@ -54,7 +55,7 @@ struct ContinueButton: View {
                     .padding(EdgeInsets(top: 13, leading: 37, bottom: 13, trailing: 37))
             }
             .buttonStyle(OnbordingExtraButton())
-            .navigationDestination(isPresented: $navigateToAccountSetup) {
+            .navigationDestination(isPresented: $navigate) {
                 AccountSetupView()
                     .navigationBarBackButtonHidden(true)
             }
@@ -66,4 +67,3 @@ struct ContinueButton: View {
     OnboardingScreen()
         .modelContainer(for: User.self)
 }
-
