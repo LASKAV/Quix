@@ -5,7 +5,7 @@ struct TitleViewModel: View {
     var body: some View {
         Text(name)
             .font(.system(size: 25, weight: .semibold))
-            .foregroundStyle(.black)
+            .foregroundStyle(Color.primary)
             .frame(maxWidth: .infinity, alignment: .leading)
             .bold()
             .padding(EdgeInsets(top: 0,

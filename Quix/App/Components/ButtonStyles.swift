@@ -19,6 +19,6 @@ struct ButtonStyleAdd: ButtonStyle {
             .resizable()
             .frame(width: 40, height: 40)
             .symbolRenderingMode(.palette)
-            .foregroundStyle(Color.customViolet, .clear)
+            .foregroundStyle(Color.appAccent, .clear)
     }
 }

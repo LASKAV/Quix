@@ -31,24 +31,3 @@ final class Transaction {
     }
     
 }
-
-//@Observable
-//class TransactionViewModel {
-//    
-//    private var modelContext: ModelContext
-//    
-//    init(modelContext: ModelContext) {
-//        self.modelContext = modelContext
-//    }
-    
-// MARK: Add Transaction
-//    func addTransaction(name: String, category: String?,
-//                        amount: Double, isExpense: Bool,
-//                        date: Date = Date()) {
-//            name: name
-//            category: category
-//            amount: amount
-//            isExpense: isExpense
-//            date: date
-//    }
-//}

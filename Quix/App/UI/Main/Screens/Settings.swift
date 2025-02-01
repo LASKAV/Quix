@@ -103,7 +103,6 @@ struct SettingsScreen: View {
                 
             }
         }
-        .background(Color.white)
         .navigationBarTitleDisplayMode(.inline)
     }
 }

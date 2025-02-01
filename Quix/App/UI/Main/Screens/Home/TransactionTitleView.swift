@@ -10,7 +10,7 @@ struct TransactionTitleView: View {
             // MARK: Title
             Text("Transactions")
                 .font(.system(size: 18, weight: .semibold))
-                .foregroundStyle(.black)
+                .foregroundStyle(Color.primary)
             
             Spacer()
             
@@ -29,7 +29,7 @@ struct TransactionTitleView: View {
                     Image(systemName: "chevron.right")
                 }
                 .font(.system(size: 18, weight: .medium))
-                .foregroundStyle(Color.customViolet)
+                .foregroundStyle(Color.appAccent)
             }
         }
         .padding(.vertical, 32)

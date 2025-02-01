@@ -29,7 +29,7 @@ struct ScreenManagerView: View {
                             icon: { Image.gear }
                         }.tag(Screens.settings)
                     
-                } .accentColor(Color.customViolet)
+                } .accentColor(Color.appAccent)
             }
         }
     }
