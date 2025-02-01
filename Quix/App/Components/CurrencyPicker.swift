@@ -5,12 +5,16 @@ struct CurrencyPicker: View {
     @Binding var isExpanded: Bool
     
     var body: some View {
-        Picker("", selection: $selectedCurrency) {
-            ForEach(CurrencyType.allCases) { currency in
-                Text("\(currency.symbol) \(currency.rawValue)").tag(currency)
+        NavigationStack {
+            Picker("", selection: $selectedCurrency) {
+                ForEach(CurrencyType.allCases) { currency in
+                    Text("\(currency.symbol) \(currency.rawValue)").tag(currency)
+                }
             }
+            .pickerStyle(WheelPickerStyle())
+            .navigationTitle("Currency")
+            .navigationBarTitleDisplayMode(.inline)
         }
-        .pickerStyle(WheelPickerStyle())
     }
 }
 

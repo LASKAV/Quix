@@ -60,7 +60,7 @@ struct CardView: View {
                     .frame(width: cardWidth, height: cardHeight / 3, alignment: .topLeading)
                     
                 
-                Text("\(currency.symbol)\(amount ?? "00.00")")
+                Text("\(currency.symbol) \(amount ?? "00.00")")
                     .font(.system(size: 35))
                     .foregroundStyle(Color.black)
                     .fontWeight(.bold)
