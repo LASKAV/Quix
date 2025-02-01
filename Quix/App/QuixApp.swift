@@ -3,17 +3,17 @@ import SwiftData
 
 @main
 struct QuixApp: App {
-    
-    // Dark mode preference
-    @AppStorage("isDarkMode") private var isDarkMode = false
-    
     var body: some Scene {
         WindowGroup {
-//            OnboardingManager()
-            ScreenManagerView()
-                .preferredColorScheme(isDarkMode ? .dark : .light)
+            ContentManagerView()
                 .modelContainer(for: [User.self, Account.self, Transaction.self])
         }
     }
+
+    init() {
+        print(URL.applicationSupportDirectory.path(percentEncoded: false))
+    }
+    
 }
+
 

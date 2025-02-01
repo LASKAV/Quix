@@ -5,27 +5,19 @@ import SwiftData
 @Model
 final class Transaction {
     
-    @Attribute(.unique) var id: UUID
-    
+    @Attribute(.unique) var id: UUID = UUID()
     var name: String
-    var category: String
+    var category: Category
     var amount: Double
     var date: Date
-    
-    // Add indexe for name
-    #Index<Transaction>([\.name], [\.category])
-    
-    var account: [Account]
-    
     var isEdited: Bool
     var isExpense: Bool
     var isTransfer: Bool
-    
-    init(name: String = "",
-         category: String = "",
-         amount: Double = 0,
+        
+    init(name: String,
+         category: Category,
+         amount: Double,
          date: Date = Date(),
-         account: [Account] = [],
          isExpense: Bool) {
         
         self.id = UUID()
@@ -33,10 +25,30 @@ final class Transaction {
         self.category = category
         self.amount = amount
         self.date = date
-        self.account = account
         self.isEdited = false
         self.isExpense = isExpense
         self.isTransfer = false
     }
     
 }
+
+//@Observable
+//class TransactionViewModel {
+//    
+//    private var modelContext: ModelContext
+//    
+//    init(modelContext: ModelContext) {
+//        self.modelContext = modelContext
+//    }
+    
+// MARK: Add Transaction
+//    func addTransaction(name: String, category: String?,
+//                        amount: Double, isExpense: Bool,
+//                        date: Date = Date()) {
+//            name: name
+//            category: category
+//            amount: amount
+//            isExpense: isExpense
+//            date: date
+//    }
+//}

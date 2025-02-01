@@ -78,43 +78,20 @@ struct ChartsScreen: View {
     
     var body: some View {
         ScrollView {
-            VStack {
+            VStack(alignment: .center, spacing: 0) {
+    
+                // MARK: Title
                 TitleViewModel(name: $title)
                 
+                // MARK:  Chart Donut
                 ChartDonut(data: $dataCategory,
                            widthSize: 300,
                            heightSize: 300)
                 
-                HStack(alignment: .center, spacing: 0) {
-                    Text("Amount")
-                        .font(.system(size: 18, weight: .regular))
-                    Spacer()
-                    Text("over the last 5 months")
-                        .font(.system(size: 16, weight: .medium))
-                        .foregroundColor(.secondary)
-                }
-                .frame(width: 340, alignment: .leading)
-                .padding(EdgeInsets(top: 0, leading: 30, bottom: 20, trailing: 30))
-                
-                Chart(mockCategory()) { item in
-                    BarMark(
-                        x: .value("Month", item.name),
-                        y: .value("Monthly Balance", item.amount)
-                    )
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                    .foregroundStyle(.gray.opacity(0.3))
-                }
-                
-                .padding(EdgeInsets(top: 0, leading: 30, bottom: 20, trailing: 30))
-                .frame(maxWidth: .infinity, maxHeight: 250)
-                
-                .chartXAxis {
-                    AxisMarks(values: .automatic) { _ in
-                        // Month labels
-                        AxisValueLabel()
-                    }
-                }
-                .chartXAxis(.hidden)
+                // MARK: Chart Steps
+                ChartSteps(data: $dataCategory,
+                           maxWidthSize: .infinity,
+                           maxHeightSize: 200)
             }
         }
     }
