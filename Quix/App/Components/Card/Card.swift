@@ -33,7 +33,7 @@ import SwiftUI
 
 struct CardView: View {
     
-    @Binding var Cardcolor: CardColor
+    @Binding var cardColor: CardColor
     @Binding var name: String
     @Binding var amount: String?
     @Binding var currency: CurrencyType
@@ -44,7 +44,7 @@ struct CardView: View {
     var body: some View {
         ZStack {
             Rectangle()
-                .fill(Cardcolor.color)
+                .fill(cardColor.color)
                 .frame(width: cardWidth, height: cardHeight)
                 .clipShape(RoundedCorner(radius: 20))
                 .shadow(color: .black.opacity(0.25),radius: 4, x: 2, y: 4)
@@ -60,7 +60,7 @@ struct CardView: View {
                     .frame(width: cardWidth, height: cardHeight / 3, alignment: .topLeading)
                     
                 
-                Text("\(currency.symbol) \(amount ?? "00.00")")
+                Text(amount ?? "")
                     .font(.system(size: 35))
                     .foregroundStyle(Color.black)
                     .fontWeight(.bold)

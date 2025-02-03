@@ -24,7 +24,7 @@ struct TransactionView: View {
             VStack(alignment: .trailing, spacing: 5) {
                 Text(transaction.isExpense ? String(format: "%.2f", transaction.amount): String(format: "- %.2f", transaction.amount))
                     .font(.system(size: 18, weight: .medium))
-                    .foregroundColor( transaction.isExpense ? .appAccent : .primary)
+                    .foregroundColor( transaction.isExpense ? .appAccent : .red)
                 
                 // MARK: Date
                 Text(transaction.date.formatted(.dateTime.day().month().year()))
@@ -33,8 +33,8 @@ struct TransactionView: View {
             }
         }
         .padding(EdgeInsets(
-            top: 0, leading: 30,
-            bottom: 0, trailing: 30))
+            top: 0, leading: 10,
+            bottom: 0, trailing: 10))
     }
 }
 

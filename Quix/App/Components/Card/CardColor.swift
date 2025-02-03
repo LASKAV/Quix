@@ -1,7 +1,7 @@
 import Foundation
 import SwiftUI
 
-enum CardColor: Hashable {
+enum CardColor: String, Codable, Hashable, CaseIterable {
     case cardBlue
     case cardPink
     case cardYellow

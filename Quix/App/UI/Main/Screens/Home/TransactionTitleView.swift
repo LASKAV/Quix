@@ -21,7 +21,7 @@ struct TransactionTitleView: View {
                         .navigationTitle("Transactions")
                         .navigationBarTitleDisplayMode(.inline)
                 } else {
-                    
+                    SectionListView(transactions: transactions)
                 }
             } label: {
                 HStack(spacing: 5) {

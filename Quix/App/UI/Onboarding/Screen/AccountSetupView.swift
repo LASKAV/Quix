@@ -3,6 +3,7 @@ import SwiftData
 
 struct AccountSetupView: View {
     @Environment(\.modelContext) private var modelContext
+    @Query private var users: [User]
     
     @State private var name = ""
     @State private var amount: String?
@@ -21,7 +22,7 @@ struct AccountSetupView: View {
                 
                 // MARK: CardView
                 CardView(
-                    Cardcolor: $cardColor,
+                    cardColor: $cardColor,
                     name: $name,
                     amount: $amount,
                     currency: $currency
@@ -60,8 +61,18 @@ struct AccountSetupView: View {
                 Spacer()
                 
                 Button {
-                    let account = Account(name: name, currency: currency.rawValue)
-                    modelContext.insert(account)
+
+                    guard let user = users.first else {
+                        print("No user found!")
+                        return
+                    }
+                    
+                    let newAccount = Account(name: name,
+                                             currency: currency.rawValue,
+                                             user: user,
+                                             cardColor: cardColor)
+                    
+                    modelContext.insert(newAccount)
                     try? modelContext.save()
                     navigateToNextScreen = true
                 } label: {
