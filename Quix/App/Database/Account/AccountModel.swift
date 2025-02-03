@@ -38,24 +38,40 @@ final class Account {
 @Observable
 class AccountViewModel {
     var modelContext: ModelContext? = nil
+    var user: User? = nil
     var accounts: [Account] = []
-    
-    func fetchAccount() {
-        let descriptor = FetchDescriptor<Account>(sortBy: [SortDescriptor(\.name)])
-        accounts = (try? (modelContext?.fetch(descriptor) ?? [])) ?? []
+        
+    func fetchAccounts() {
+        guard let userId = user?.id else { return }
+
+        let descriptor = FetchDescriptor<Account>(
+                predicate: #Predicate { account in
+                    account.user?.id == userId
+                },
+                sortBy: [SortDescriptor(\.name)]
+            )
+        
+        accounts = (try? modelContext?.fetch(descriptor) ?? []) ?? []
     }
     
     func addAccount(name: String, currency: String, cardColor: CardColor) {
-        let newAccount = Account(name: name, currency: currency, cardColor: cardColor)
-        modelContext?.insert(newAccount)
-        try? modelContext?.save()
-        fetchAccount()
-    }
+            
+            guard let user else { return }
+            
+            let newAccount = Account(name: name,
+                                     currency: currency,
+                                     user: user,
+                                     cardColor: cardColor)
+            
+            modelContext?.insert(newAccount)
+            try? modelContext?.save()
+            fetchAccounts()
+        }
     
     func deleteAccount(account: Account) {
         modelContext?.delete(account)
         try? modelContext?.save()
-        fetchAccount()
+        fetchAccounts()
     }
     
     func updateAccount(account: Account,
@@ -63,18 +79,12 @@ class AccountViewModel {
                        newCurrency: String?,
                        newCardColor: CardColor?) {
         
-        if let newName = newName {
-            account.name = newName
-        }
-        if let newCurrency = newCurrency {
-            account.currency = newCurrency
-        }
-        if let newCardColor = newCardColor {
-            account.cardColor = newCardColor
-        }
-        try? modelContext?.save()
-        fetchAccount()
+        if let newName { account.name = newName }
+        if let newCurrency { account.currency = newCurrency }
+        if let newCardColor { account.cardColor = newCardColor }
         
+        try? modelContext?.save()
+        fetchAccounts()
     }
 }
 

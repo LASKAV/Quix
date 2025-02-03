@@ -1,36 +1,6 @@
 import Foundation
 import SwiftUI
 
-//struct Card: Identifiable {
-//    let id = UUID()
-//    let name: String
-//    let amount: String
-//    let currency: String
-//    let color: ColorResource
-//    
-//    static let cardsData: [Card] = [
-//        Card(name: "Mono 🐈‍⬛",
-//             amount: Card.formatAmount(69563.00, for: "UAH"),
-//             currency: "UAH",
-//             color: .cardBlue
-//        ),
-//        Card(name: "DNB 🇳🇴",
-//             amount: Card.formatAmount(34000.00, for: "NOK"),
-//             currency: "NOK",
-//             color: .cardPink
-//        ),
-//        Card(name: "Binance 💎",
-//             amount: Card.formatAmount(4000.00, for: "USD"),
-//             currency: "USD",
-//             color: .cardYellow
-//        )
-//    ]
-//    
-//    static func formatAmount(_ amount: Double, for currency: String) -> String {
-//        return amount.formatted(.currency(code: currency).presentation(.narrow))
-//    }
-//}
-
 struct CardView: View {
     
     @Binding var cardColor: CardColor
@@ -46,8 +16,8 @@ struct CardView: View {
             Rectangle()
                 .fill(cardColor.color)
                 .frame(width: cardWidth, height: cardHeight)
-                .clipShape(RoundedCorner(radius: 20))
-                .shadow(color: .black.opacity(0.25),radius: 4, x: 2, y: 4)
+                .clipShape(RoundedRectangle(cornerRadius: 20))
+                .shadow(color: .black.opacity(0.25), radius: 4, x: 2, y: 4)
             
             VStack(alignment: .center, spacing: 0) {
                 
@@ -59,8 +29,7 @@ struct CardView: View {
                     .padding([.leading, .top], 20)
                     .frame(width: cardWidth, height: cardHeight / 3, alignment: .topLeading)
                     
-                
-                Text(amount ?? "")
+                Text(formattedAmount)
                     .font(.system(size: 35))
                     .foregroundStyle(Color.black)
                     .fontWeight(.bold)
@@ -74,10 +43,22 @@ struct CardView: View {
                     .lineLimit(1)
                     .padding([.trailing, .bottom], 20)
                     .frame(width: cardWidth, height: cardHeight / 3, alignment: .bottomTrailing)
-                    
             }
             .frame(width: cardWidth, height: cardHeight)
         }
     }
+    private var formattedAmount: String {
+        if let amount = amount, let doubleValue = Double(amount) {
+            let formatter = NumberFormatter()
+            formatter.numberStyle = .decimal
+            formatter.groupingSeparator = " "
+            formatter.minimumFractionDigits = 2
+            formatter.maximumFractionDigits = 2
+            
+            return formatter.string(from: NSNumber(value: doubleValue)) ?? amount
+        }
+        return "00.00"
+    }
+
 }
 

@@ -2,16 +2,16 @@ import SwiftUI
 import SwiftData
 
 struct AccountSetupView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Query private var users: [User]
-    
     @State private var name = ""
     @State private var amount: String?
     @State private var currency: CurrencyType = .usd
     @State private var cardColor: CardColor = .cardBlue
-    
     @State private var isExpanded = false
     @State private var navigateToNextScreen = false
+    
+    @State private var accountViewModel = AccountViewModel()
+    @Environment(\.modelContext) private var modelContext
+    @Query private var users: [User]
     
     var body: some View {
         NavigationStack {
@@ -61,19 +61,11 @@ struct AccountSetupView: View {
                 Spacer()
                 
                 Button {
-
-                    guard let user = users.first else {
-                        print("No user found!")
-                        return
-                    }
-                    
-                    let newAccount = Account(name: name,
-                                             currency: currency.rawValue,
-                                             user: user,
-                                             cardColor: cardColor)
-                    
-                    modelContext.insert(newAccount)
-                    try? modelContext.save()
+                    accountViewModel.modelContext = modelContext
+                    accountViewModel.user = users.first
+                    accountViewModel.addAccount(name: name,
+                                                currency: currency.rawValue,
+                                                cardColor: cardColor)
                     navigateToNextScreen = true
                 } label: {
                     Text("Continue")
