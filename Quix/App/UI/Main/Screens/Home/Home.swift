@@ -4,7 +4,6 @@ import SwiftData
 struct HomeScreen: View {
     @State private var title = "Home"
     @State private var currentPage: Int = 0
-    
     @State private var accountViewModel = AccountViewModel()
     @Environment(\.modelContext) private var modelContext
     @Query private var users: [User]
@@ -42,7 +41,6 @@ struct HomeScreen: View {
                 }
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
                 .frame(width: 400, height: 240)
-               
             } else {
                 TabView(selection: $currentPage) {
                     ForEach(accountViewModel.accounts.indices, id: \.self) { index in
@@ -96,6 +94,7 @@ struct HomeScreen: View {
         }
     }
 }
+
 
 struct CustomPageControl: UIViewRepresentable {
     var numberOfPages: Int
