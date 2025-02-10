@@ -11,4 +11,6 @@ extension Image {
     static let cellularbars = Image(systemName: "cellularbars")
     static let gear = Image(systemName: "gear")
     static let lock = Image(systemName: "eyes.inverse")
+    static let creditcard = Image(systemName: "creditcard.fill")
+    
 }

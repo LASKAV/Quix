@@ -16,7 +16,7 @@ struct TransactionTitleView: View {
             
             // MARK: Link to All Transactions
             NavigationLink {
-                if transactions.isEmpty {
+                if !transactions.isEmpty {
                     ListTransactionDefault(columnsCount: 10,titleName: "")
                         .navigationTitle("Transactions")
                         .navigationBarTitleDisplayMode(.inline)

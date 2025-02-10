@@ -45,6 +45,7 @@ struct CardView: View {
                     .frame(width: cardWidth, height: cardHeight / 3, alignment: .bottomTrailing)
             }
             .frame(width: cardWidth, height: cardHeight)
+            
         }
     }
     private var formattedAmount: String {

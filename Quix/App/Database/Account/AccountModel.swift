@@ -77,11 +77,11 @@ class AccountViewModel {
     func updateAccount(account: Account,
                        newName: String?,
                        newCurrency: String?,
-                       newCardColor: CardColor?) {
+                       newCardColor: CardColor) {
         
         if let newName { account.name = newName }
         if let newCurrency { account.currency = newCurrency }
-        if let newCardColor { account.cardColor = newCardColor }
+        account.cardColor = newCardColor
         
         try? modelContext?.save()
         fetchAccounts()

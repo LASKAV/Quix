@@ -5,7 +5,9 @@ import SwiftUI
 enum Screens: Hashable {
     case home
     case charts
+    case accountSetup
     case settings
+    
 }
 
 @Observable
@@ -21,7 +23,9 @@ final class ScreenType {
             print("user section: Charts")
         case .settings:
             print("user section: Settings")
+        case .accountSetup:
+            print("user section: Account Setup")
         }
-        
+    
     }
 }

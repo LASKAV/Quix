@@ -22,6 +22,14 @@ struct ScreenManagerView: View {
                             icon: { Image.cellularbars }
                         }.tag(Screens.charts)
                     
+                    // MARK: New card
+                    AccountSetupView()
+                        .tabItem {
+                            Label { Text("Cards") }
+                            icon: { Image.creditcard }
+                        }.tag(Screens.accountSetup)
+                        
+                    
                     // MARK: Screen Settings
                     SettingsScreen()
                         .tabItem {

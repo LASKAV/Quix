@@ -68,7 +68,7 @@ struct AccountSetupView: View {
                                                 cardColor: cardColor)
                     navigateToNextScreen = true
                 } label: {
-                    Text("Continue")
+                    Text("Сonfirm")
                         .padding(EdgeInsets(top: 13, leading: 37, bottom: 13, trailing: 37))
                 }
                 .font(.system(size: 20, weight: .heavy, design: .default))
