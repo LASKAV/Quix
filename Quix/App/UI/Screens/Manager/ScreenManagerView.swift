@@ -9,14 +9,14 @@ struct ScreenManagerView: View {
                 TabView(selection: $screen.tabBarSections) {
                     
                     // MARK: Screen Home
-                    HomeScreen()
+                    HomeScreenView()
                         .tabItem {
                             Label { Text("Home") }
                             icon: { Image.house }
                         }.tag(Screens.home)
                     
                     // MARK: Screen Charts
-                    ChartsScreen()
+                    ChartsScreenView()
                         .tabItem {
                             Label { Text("Charts") }
                             icon: { Image.cellularbars }

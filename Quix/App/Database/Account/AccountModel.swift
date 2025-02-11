@@ -40,6 +40,7 @@ class AccountViewModel {
     var modelContext: ModelContext? = nil
     var user: User? = nil
     var accounts: [Account] = []
+    var transactions: [Transaction] = []
         
     func fetchAccounts() {
         guard let userId = user?.id else { return }

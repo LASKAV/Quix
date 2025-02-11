@@ -1,7 +1,7 @@
 import SwiftUI
 import Charts
 
-struct TitleViewLastMonth: View {
+struct TitleLastMonthView: View {
     var body: some View {
         // MARK: Title
         HStack(alignment: .center, spacing: 10) {
@@ -13,42 +13,6 @@ struct TitleViewLastMonth: View {
                     .font(.system(size: 16, weight: .medium))
                     .foregroundColor(.secondary)
             }
-        }
-    }
-}
-
-struct ListCategoryDefault: View {
-    
-    var listWidth: CGFloat = 340
-    var listHeight: CGFloat = 20
-    var backgroundColor: Color = Color.gray
-    var titleName: String
-    @State private var isAnimating: Bool = false
-    
-    var body: some View {
-        ZStack {
-            VStack(spacing: 20) {
-                    ForEach(0..<4, id: \.self) { _ in
-                        HStack {
-                            Circle()
-                                .fill(backgroundColor)
-                                .frame(width: 15, height: 15)
-                            
-                            Rectangle()
-                                .fill(backgroundColor)
-                                .clipShape(RoundedCorner(radius: 5))
-                                
-                        }
-                        .opacity(isAnimating ? 0.08 : 0.3)
-                        .animation(
-                            Animation.easeInOut(duration: 1)
-                                .repeatForever(autoreverses: true),
-                            value: isAnimating
-                        )
-                }
-                .frame(width: listWidth, height: listHeight)
-            }
-            .onAppear { isAnimating = true }
         }
     }
 }
@@ -71,7 +35,8 @@ func mockCategory() -> [TransactionCategoryChart] {
     return mockData
 }
 
-struct ChartsScreen: View {
+struct ChartsScreenView: View {
+    
     @State private var title = "Charts"
     @State private var dataCategory: [TransactionCategoryChart] = mockCategory()
     @State private var currentAngle: Double = 0
@@ -98,5 +63,5 @@ struct ChartsScreen: View {
 }
 
 #Preview {
-    ChartsScreen()
+    ChartsScreenView()
 }

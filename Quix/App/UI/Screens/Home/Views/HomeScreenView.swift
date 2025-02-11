@@ -1,7 +1,7 @@
 import SwiftUI
 import SwiftData
 
-struct HomeScreen: View {
+struct HomeScreenView: View {
     @State private var title = "Home"
     @Query private var transactions: [Transaction]
     
@@ -9,7 +9,7 @@ struct HomeScreen: View {
         VStack(alignment: .center, spacing: 0) {
             HStack(alignment: .top) {
                 TitleViewModel(name: $title)
-                AddExpenseButton()
+                ExpenseAddButton()
             }
             
             CardsTabView()
@@ -33,5 +33,5 @@ struct HomeScreen: View {
 }
 
 #Preview {
-    HomeScreen()
+    HomeScreenView()
 }
